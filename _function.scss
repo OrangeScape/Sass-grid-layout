@@ -1,0 +1,7 @@
+@function breakpointMin($name, $breakpoints: $gridBreakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+@function breakpointValue($name, $breakpoints: $gridBreakpoints) {
+  @return if(breakpointMin($name, $breakpoints) == null, "", "#{$name}");
+}

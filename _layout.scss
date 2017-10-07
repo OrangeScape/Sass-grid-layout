@@ -1,0 +1,39 @@
+@import 'partials/function';
+@import 'partials/mixins';
+@import 'partials/variable';
+
+@mixin columnWidth($size, $columns: $gridColumns) {
+  width: percentage($size/$columns);
+}
+@mixin offsetColumns( $size, $columns) {
+   margin-left: percentage($size / $columns);
+}
+@mixin mediaBreakpoint($name, $breakpoints: $gridBreakpoints) {
+  $min: breakpointMin($name, $breakpoints);
+  @if $min {
+    @media only screen and (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+@mixin gridColumns($columns: $gridColumns, $gutters: $gridGutterWidths, $breakpoints: $gridBreakpoints) {
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpointValue($breakpoint, $breakpoints); 
+    @include mediaBreakpoint($breakpoint, $breakpoints) {
+      @for $i from 1 through $columns {
+        .#{$infix}#{$i} {
+          @include columnWidth($i, $columns);
+        }
+      }
+      @for $i from 0 through ($columns - 1) {
+        @if not ($infix == "" and $i == 0) { 
+          .offset-#{$infix}#{$i} {
+            @include offsetColumns($i, $columns);
+          }
+        }
+      }
+    }    
+  }
+}

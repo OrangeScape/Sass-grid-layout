@@ -1,0 +1,15 @@
+%clearfix {
+    &::after {
+        display: table;
+        clear: both;
+        content: '';
+    }
+}
+
+%truncate {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+}

@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@import "partials/utils";
+@import "partials/rtl";
+@import "partials/variable";
+@import "partials/reset";
+@import "partials/mixins";
+@import "partials/layout";
+@import "partials/colors";
+@import "partials/dropdown";
+@include basefont();
+@include gridColumns();
+
+
